@@ -68,6 +68,127 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "product detail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "133c8ab2-c102-4eb1-bdcc-1f8cec81066b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"product_name is 43 Piece Dinner Set\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.product_name).to.eql(\"43 Piece Dinner Set\");",
+							"});",
+							"",
+							"pm.test(\"product_price is 10.00\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.product_price).to.eql(10.00);",
+							"});",
+							"",
+							"pm.test(\"product_quantify is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.product_quantify).to.eql(1);",
+							"});",
+							"pm.test(\"product_brand is CoolKidz\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.product_brand).to.eql(\"CoolKidz\");",
+							"});",
+							"",
+							"pm.test(\"product_image is /43-piece-dinner-set.png\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.product_image).to.eql(\"/43-piece-dinner-set.png\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/product/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"product",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart\" : [\n        { \n          \"product_id\": 1,\n          \"quantity\": 1,\n        }\n       ],\n    \"shipping_method\" : \"Kerry\",\n    \"shipping_address\" : \"405/37 ถ.มหิดล\",\n    \"shipping_sub_district\" : \"ต.ท่าศาลา\",\n    \"shipping_district\" : \"อ.เมือง\",\n    \"shipping_province\" : \"จ.เชียงใหม่\",\n    \"shipping_zip_code\" : \"50000\",\n    \"recipient_name\" : \"ณัฐญา ชุติบุตร\",\n    \"recipient_phone_number\" : \"0970809292\",\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/submitOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"submitOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm payment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
 		}
 	]
 }
